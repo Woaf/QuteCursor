@@ -54,16 +54,31 @@ instructions.  Note that AVX is the fastest but requires a CPU from at least
 #include <dlib/gui_widgets.h>
 #include <dlib/image_io.h>
 
+#include <QApplication>
+#include <QMessageBox>
+
 using namespace std;
 using namespace dlib;
 using namespace cv;
 
 // ----------------------------------------------------------------------------------------
 
+void runCameraCalib()
+{
+    writeFolderContentsToAFile();
+    QMessageBox::StandardButton quit;
+    quit = QMessageBox::question(new QWidget, "Camera calibration", "Are you sure you want calibrate Your camera?", QMessageBox::Yes|QMessageBox::No);
+    if (quit == QMessageBox::Yes)
+    {
+        if (calibrateCameraOnce() != 0)
+        {
+            cout << "Cannot callibrate camera!" << endl;
+        }
+    }
+}
+
 int runHeadCursor()
 {
-    showWelcomeMessage();
-    showUserManual();
     try
     {
         // elinditjuk az elsodleges kamerat
@@ -73,23 +88,6 @@ int runHeadCursor()
             cout << "Could not detect camera!" << endl;
             writeQuitMessage();
             return -1;
-        }
-
-        writeFolderContentsToAFile();
-
-        if (calibrateCameraQuery())
-        {
-            if (calibrateCameraOnce() != 0)
-            {
-                cout << "Cannot callibrate camera!" << endl;
-                char quit = 'a';
-                writeQuitMessage();
-                while (quit != 'q')
-                {
-                    cin >> quit;
-                }
-                return -1;
-            }
         }
 
         ifstream cameraMatrixFile;
@@ -321,7 +319,7 @@ int runHeadCursor()
                 }
 
                 // Step 7: move cursor
-                ShowCursor(0);
+                //ShowCursor(0);
 
                 POINT currentCursorPos;
                 GetCursorPos(&currentCursorPos);
@@ -371,14 +369,9 @@ int runHeadCursor()
         return -1;
     }
 
-    char a = 'a';
     showAppreciationMessage();
     showCopyrightMessage();
-    writeQuitMessage();
-    while (a != 'q')
-    {
-        cin >> a;
-    }
+
     return 0;
 }
 

@@ -15,6 +15,11 @@ public:
     explicit QuteCursor(QWidget *parent = 0);
     ~QuteCursor();
 
+private slots:
+    void on_calibrate_clicked();
+
+    void on_cursor_clicked();
+
 private:
     Ui::QuteCursor *ui;
 };
