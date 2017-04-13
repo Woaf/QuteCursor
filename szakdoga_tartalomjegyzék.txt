@@ -1,0 +1,51 @@
+Bevezetés 
+	- a fejmozgást követő programok szükségszerűsége és lehetőségei
+	- különböző felpozíció becslő eljárások (pnp, p3p, több kamerás)
+
+	
+Felhasználói: 
+	- telepítés
+	- a telepítési könyvtár tartalmai
+	- a kalibráció használata
+	- a program általános használata
+		- screenshotok
+
+
+Fejlesztői: 
+	
+	Algoritmikus háttér
+		Első fejezet
+			- egy arc felismerése referenciapontok használatval
+			- azon pontok használata, melyek eredményesebb és gyorsabb fejpozíció becslést
+			  tesznek lehetővé
+		Máasoik fejezet
+			- a különböző koordináta rendszerek a fejpoz becslés használatánál
+			- szükéseg adatok a fejpozíció becsléshez a hozzájuk tartozó koordináta      rendszerekben
+			- adatok értelmezése, és a probléma algoritmusának előkészítése
+		Harmadik fejezet
+			- az algoritmus eljárása, azaz az adatok feldolgozásának lépései
+				- sin és cos tételek
+				- forgatási mátrix értelmezése 3d-ben
+				- egér kurzor mozgatása
+
+	Architektúra
+		- statikus felépítés (pl. osztálydiagram)
+				- kód elkülönítése, és a projekt általános struktúrája
+				- függvények használata , hogyan kötődnek a feladat megoldásához
+				- a saját függvények hogyan oldják meg az alap feladatot
+
+		- dinamikus működés (pl. szekvenciadiagram)
+		
+	Technikai részletek
+		- OpenCV és DLib letöltése és használata
+		- egy projekt build-elése OpenCV segítségével (függőségek beállítása) a MSVS 2015-höz
+		- DLib és OpenCV include és namespace használata és veszélyei (bugok)
+		- a Dlib-hez szükséges könyvtárak hozzáadása a projekthez
+	
+	Tesztelés
+		tesztelés (minden fv egyenként nagyon részletesen)
+		
+	Hivatkozások
+		- Google scholar
+		- honlapoknál elérési dátum
+		- bibtex
