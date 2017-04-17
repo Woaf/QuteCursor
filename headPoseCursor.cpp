@@ -74,7 +74,13 @@ void runCameraCalib()
     {
         if (calibrateCameraOnce() != 0)
         {
-            QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!");
+            QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!\n\n"
+                                                                     "Make sure that 'default.xml' is not missing from the directory of this application,\n"
+                                                                     "and that You have given valid images in the images folder.\n"
+                                                                     "(You should have at lease 10 appropriate images in the images folder.)\n\n"
+                                                                     "*Hint: an appropriate image requires you to print out the 'pattern.png' picture on a full size A4 paper, "
+                                                                     "and take several images holding it in different positions while the camera can still see the full image.\n"
+                                                                     "It is important that You take the images with the camera on the device You wish to use this application on.");
         }
     }
 }
@@ -87,7 +93,8 @@ int runHeadCursor()
         VideoCapture cap(0);
         if (!cap.isOpened())
         {
-            QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!");
+            QMessageBox::critical(new QWidget, "Camera calibration", "Could not detect camera!\n\n"
+                                                                     "Please make sure that a camera is attached or enabled on Your device.");
             cerr << "Could not detect camera!" << endl;
             return -1;
         }
@@ -96,6 +103,7 @@ int runHeadCursor()
         cameraMatrixFile.open("cameraMatrixFile");
         if (!cameraMatrixFile.is_open())
         {
+            QMessageBox::information(new QWidget, "Camera calibration", "Could not open an existing camera matrix file.\nOpening default camera matrix file.");
             cout << "Could not open an existing camera matrix file." << endl;
             cout << "Opening default camera matrix file." << endl;
             createCameraMatrixFile();
@@ -308,7 +316,7 @@ int runHeadCursor()
                 }
                 move_on_x = 16522.1 * rotationRadiansAroundYAxis + 1440;
 
-                Point2d smoothTransition(0.9*currentCursorPos.x + 0.1*move_on_x, 0.9*currentCursorPos.y + 0.1*move_on_y );
+                Point2d smoothTransition(0.85*currentCursorPos.x + 0.15*move_on_x, 0.85*currentCursorPos.y + 0.15*move_on_y );
 
                 SetCursorPos((int)smoothTransition.x, (int)smoothTransition.y);
 

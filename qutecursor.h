@@ -20,6 +20,12 @@ private slots:
 
     void on_cursor_clicked();
 
+    void on_actionQuit_triggered();
+
+    void on_actionCalibrate_camera_triggered();
+
+    void on_actionStart_QuteCursor_triggered();
+
 private:
     Ui::QuteCursor *ui;
 };
