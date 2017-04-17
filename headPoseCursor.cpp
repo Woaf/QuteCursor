@@ -74,7 +74,7 @@ void runCameraCalib()
     {
         if (calibrateCameraOnce() != 0)
         {
-            cout << "Cannot callibrate camera!" << endl;
+            QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!");
         }
     }
 }
@@ -87,7 +87,8 @@ int runHeadCursor()
         VideoCapture cap(0);
         if (!cap.isOpened())
         {
-            cout << "Could not detect camera!" << endl;
+            QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!");
+            cerr << "Could not detect camera!" << endl;
             return -1;
         }
 
@@ -199,31 +200,7 @@ int runHeadCursor()
                 circle(bg, drawable_leftEye, 15, green, 2, 8);
                 circle(bg, drawable_noseTip, 15, red,   2, 8);
 
-                // Step 2: elokszitjuk a p3p egyenletrendszert
-                // az elek altal bezart szogek
-                //A: right eye normalized
-                //B: left eye normalized
-                //C: nose tip normalized
-
-                /*
-                double cosines[3] = { 0, 0, 0 };
-                returnAnglesBetweenThreePoints(cosines, rightEye_normalized, leftEye_normalized, noseTip_normalized);
-
-                double cosineOf_UV = cosines[0];
-                double cosineOf_UW = cosines[1];
-                double cosineOf_VW = cosines[2];
-
-                // AB<-(szemek kozti tavolsag), BC<-(bal szem es orr tavolsaga), AC<-(jobb szem es orr tavolsaga):
-                double distanceOf_AB = returnThreeDimensionalDistance(mesh_rightEye, mesh_leftEye);
-                double distanceOf_BC = returnThreeDimensionalDistance(mesh_leftEye, mesh_noseTip);
-                double distanceOf_AC = returnThreeDimensionalDistance(mesh_rightEye, mesh_noseTip);
-                */
-
                 // OWN METHOD:
-
-                double distanceOf_PA = returnThreeDimensionalDistance(rightEye_normalized);
-                double distanceOf_PB = returnThreeDimensionalDistance(leftEye_normalized);
-                double distanceOf_PC = returnThreeDimensionalDistance(noseTip_normalized);
 
                 // Step 4: megtallajuk a 3d koordinatakat az A B es C pontokhoz
                 // A = rightEye_normalized * || PA ||
@@ -255,20 +232,6 @@ int runHeadCursor()
                 // 1 Cenrtoidok
                 // FONTOS: legyenek a mesh pointok a 3d mesh pontjai!!!!
 
-                Point3d centroidOf_MeshPoints = returnCentroidOfThreePoints(3, mesh_rightEye, mesh_leftEye, mesh_noseTip);
-                Point3d centroidOf_CorrespondingPoints = returnCentroidOfThreePoints(2, correspondingPointOf_A, correspondingPointOf_B, correspondingPointOf_C);
-
-                // 2 centroidok kozepre huzasa a hozzajuk tartozo ponthalmazokkal
-
-                Point fdsa = returnDrawablePoint(mesh_rightEye, 1, 320, 240);
-                Point fdsa2 = returnDrawablePoint(mesh_leftEye, 1, 320, 240);
-                Point fdsa3 = returnDrawablePoint(mesh_noseTip, 1, 320, 240);
-
-                Scalar cyan(255, 255, 0);
-                circle(bg, fdsa, 5, cyan, 2, 3);
-                circle(bg, fdsa2, 5, cyan, 2, 3);
-                circle(bg, fdsa3, 5, cyan, 2, 3);
-
                 // 3 a forgatasi matrix kiszamolasa
                 // eloszor eltaroljuk a szukseges szamokat egy vektorban
                 // ___      [ x y z ]
@@ -293,15 +256,13 @@ int runHeadCursor()
                 }
 
                 double rotationRadiansAroundXAxis = atan2(matrixOf_Rotation.at<double>(2, 1), matrixOf_Rotation.at<double>(2, 2));
-                //cout << "x axis: " << rotationRadiansAroundXAxis * 180 / pi << endl;
                 double rotationRadiansAroundYAxis = atan2(-matrixOf_Rotation.at<double>(2, 0), sqrt(pow(matrixOf_Rotation.at<double>(2, 1), 2) + pow(matrixOf_Rotation.at<double>(2, 2), 2)));
-                //cout << "y axis: " << rotationRadiansAroundYAxis * 180 / pi << endl;
                 double rotationRadiansAroundZAxis = atan2(matrixOf_Rotation.at<double>(1, 0), matrixOf_Rotation.at<double>(0, 0));
-                //cout << "z axis: " << rotationRadiansAroundZAxis << endl;
 
                 // transzlacio vektor kiszamolasa
+                /*
                 Mat_<double> vectorOf_Translation = Mat_<double>(centroidOf_rawFacePoints);
-                //cout << "translation: " << endl << vectorOf_Translation << endl;
+                */
 
                 // Step 6: kirajzolunk koroket a szemek es az orr pontjaihoz
                 // beszorozzuk a mesh pontokat a forgatasi matrixal
@@ -320,7 +281,6 @@ int runHeadCursor()
                 }
 
                 // Step 7: move cursor
-                //ShowCursor(0);
 
                 POINT currentCursorPos;
                 GetCursorPos(&currentCursorPos);
@@ -367,6 +327,7 @@ int runHeadCursor()
     catch (exception &e)
     {
         writeErrorFile(e);
+        QMessageBox::critical(new QWidget, "Failure", e.what());
         return -1;
     }
 

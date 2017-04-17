@@ -61,7 +61,7 @@ void readAndSetCameraClaibrationValues(double &focalLenght_x, double &focalLengt
 
 void returnMeshPointsFromAFile(Point3d *meshPoints)
 {
-    ifstream input("pose_mean_shape.txt");
+    ifstream input("pose_mean_shape");
     double x, y, z = 0;
     int lineCounter = 0;
     while (input >> x >> y >> z)
