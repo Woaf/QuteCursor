@@ -79,7 +79,7 @@ SOURCES += main.cpp\
     fileHandlerFunctions.cpp \
     headPoseCursor.cpp \
     welcomeMessage.cpp \
-    ownFunctions.cpp
+    developmentalFunctions.cpp
 
 HEADERS  += qutecursor.h \
     calculaitonFunctions.h \
@@ -89,6 +89,7 @@ HEADERS  += qutecursor.h \
     errorHandling.h \
     fileHandlerFunctions.h \
     headPoseCursor.h \
-    ownFunctions.h
+    welcomeMessage.h \
+    developmentalFunctions.h
 
 FORMS    += qutecursor.ui

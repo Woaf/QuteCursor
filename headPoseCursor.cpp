@@ -37,7 +37,9 @@ instructions.  Note that AVX is the fastest but requires a CPU from at least
 #include "welcomeMessage.h"
 #include "directoryAccessFunctions.h"
 #include "cameraCalibration.h"
-#include "ownFunctions.h"
+#include "fileHandlerFunctions.h"
+#include "calculaitonFunctions.h"
+#include "developmentalFunctions.h"
 #include "errorHandling.h"
 
 #include "opencv2/imgcodecs.hpp"

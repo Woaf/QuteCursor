@@ -1,5 +1,7 @@
 #include "errorHandling.h"
 
+using namespace std;
+
 void writeQuitMessage()
 {
     cout << "Press 'q' then Enter to exit." << endl;

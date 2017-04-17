@@ -8,8 +8,6 @@
 #include <sstream>
 #include "dirent.h"
 
-using namespace std;
-
 void writeFolderContentsToAFile();
 
 #endif

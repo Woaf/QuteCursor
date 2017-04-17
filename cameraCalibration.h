@@ -16,8 +16,6 @@
 #include <ctime>
 #include <cstdio>
 
-using namespace std;
-
 class Settings
 {
 public:
@@ -73,17 +71,17 @@ public:
         goodInput = true;
         if (boardSize.width <= 0 || boardSize.height <= 0)
         {
-            cerr << "Invalid Board size: " << boardSize.width << " " << boardSize.height << endl;
+            std::cerr << "Invalid Board size: " << boardSize.width << " " << boardSize.height << std::endl;
             goodInput = false;
         }
         if (squareSize <= 10e-6)
         {
-            cerr << "Invalid square size " << squareSize << endl;
+            std::cerr << "Invalid square size " << squareSize << std::endl;
             goodInput = false;
         }
         if (nrFrames <= 0)
         {
-            cerr << "Invalid number of frames " << nrFrames << endl;
+            std::cerr << "Invalid number of frames " << nrFrames << std::endl;
             goodInput = false;
         }
 
@@ -93,7 +91,7 @@ public:
         {
             if (input[0] >= '0' && input[0] <= '9')
             {
-                stringstream ss(input);
+                std::stringstream ss(input);
                 ss >> cameraID;
                 inputType = CAMERA;
             }
@@ -116,7 +114,7 @@ public:
         }
         if (inputType == INVALID)
         {
-            cerr << " Input does not exist: " << input;
+            std::cerr << " Input does not exist: " << input;
             goodInput = false;
         }
 
@@ -139,7 +137,7 @@ public:
         if (!patternToUse.compare("ASYMMETRIC_CIRCLES_GRID")) calibrationPattern = ASYMMETRIC_CIRCLES_GRID;
         if (calibrationPattern == NOT_EXISTING)
         {
-            cerr << " Camera calibration mode does not exist: " << patternToUse << endl;
+            std::cerr << " Camera calibration mode does not exist: " << patternToUse << std::endl;
             goodInput = false;
         }
         atImageList = 0;
@@ -160,7 +158,7 @@ public:
         return result;
     }
 
-    static bool readStringList(const string &filename, std::vector<string> &l)
+    static bool readStringList(const std::string &filename, std::vector<std::string> &l)
     {
         l.clear();
         cv::FileStorage fs(filename, cv::FileStorage::READ);
@@ -171,7 +169,7 @@ public:
             return false;
         cv::FileNodeIterator it = n.begin(), it_end = n.end();
         for (; it != it_end; ++it)
-            l.push_back((string)*it);
+            l.push_back((std::string)*it);
         return true;
     }
 public:
@@ -186,13 +184,13 @@ public:
     bool calibZeroTangentDist;   // Assume zero tangential distortion
     bool calibFixPrincipalPoint; // Fix the principal point at the center
     bool flipVertical;           // Flip the captured images around the horizontal axis
-    string outputFileName;       // The name of the file where to write
+    std::string outputFileName;       // The name of the file where to write
     bool showUndistorsed;        // Show undistorted images after calibration
-    string input;                // The input ->
+    std::string input;                // The input ->
     bool useFisheye;             // use fisheye camera model for calibration
 
     int cameraID;
-    std::vector<string> imageList;
+    std::vector<std::string> imageList;
     size_t atImageList;
     cv::VideoCapture inputCapture;
     InputType inputType;
@@ -200,7 +198,7 @@ public:
     int flag;
 
 private:
-    string patternToUse;
+    std::string patternToUse;
 };
 
 enum { DETECTION = 0, CAPTURING = 1, CALIBRATED = 2 };

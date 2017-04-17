@@ -1,6 +1,6 @@
 #pragma once
-#ifndef HEADPOSECURSOR_H
-#define HEADPOSEFURSOR_H
+#ifndef HEADPOSECURSOR_H_
+#define HEADPOSEFURSOR_H_
 
 void runCameraCalib();
 int runHeadCursor();

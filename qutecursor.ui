@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>390</width>
-    <height>185</height>
+    <width>901</width>
+    <height>487</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,8 +17,8 @@
    <widget class="QPushButton" name="calibrate">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>10</y>
+      <x>570</x>
+      <y>310</y>
       <width>141</width>
       <height>121</height>
      </rect>
@@ -30,8 +30,8 @@
    <widget class="QPushButton" name="cursor">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>10</y>
+      <x>740</x>
+      <y>310</y>
       <width>141</width>
       <height>121</height>
      </rect>
@@ -46,7 +46,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>390</width>
+     <width>901</width>
      <height>21</height>
     </rect>
    </property>

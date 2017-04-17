@@ -1,5 +1,7 @@
 #include "directoryAccessFunctions.h"
 
+using namespace std;
+
 DIR *imagesDirectory;
 struct dirent *entity;
 

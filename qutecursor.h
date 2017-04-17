@@ -1,5 +1,5 @@
-#ifndef QUTECURSOR_H
-#define QUTECURSOR_H
+#ifndef QUTECURSOR_H_
+#define QUTECURSOR_H_
 
 #include <QMainWindow>
 

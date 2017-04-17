@@ -5,9 +5,7 @@
 #include <iostream>
 #include <fstream>
 
-using namespace std;
-
 void writeQuitMessage();
-void writeErrorFile(exception &e);
+void writeErrorFile(std::exception &e);
 
 #endif
