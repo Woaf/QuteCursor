@@ -88,7 +88,6 @@ int runHeadCursor()
         if (!cap.isOpened())
         {
             cout << "Could not detect camera!" << endl;
-            writeQuitMessage();
             return -1;
         }
 
