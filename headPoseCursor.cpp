@@ -68,20 +68,15 @@ using namespace cv;
 void runCameraCalib()
 {
     writeFolderContentsToAFile();
-    QMessageBox::StandardButton quit;
-    quit = QMessageBox::question(new QWidget, "Camera calibration", "Are you sure you want calibrate Your camera?", QMessageBox::Yes|QMessageBox::No);
-    if (quit == QMessageBox::Yes)
+    if (calibrateCameraOnce() != 0)
     {
-        if (calibrateCameraOnce() != 0)
-        {
-            QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!\n\n"
-                                                                     "Make sure that 'default.xml' is not missing from the directory of this application,\n"
-                                                                     "and that You have given valid images in the images folder.\n"
-                                                                     "(You should have at lease 10 appropriate images in the images folder.)\n\n"
-                                                                     "*Hint: an appropriate image requires you to print out the 'pattern.png' picture on a full size A4 paper, "
-                                                                     "and take several images holding it in different positions while the camera can still see the full image.\n"
-                                                                     "It is important that You take the images with the camera on the device You wish to use this application on.");
-        }
+        QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!\n\n"
+                                                                 "Make sure that 'default.xml' is not missing from the directory of this application,\n"
+                                                                 "and that You have given valid images in the images folder.\n"
+                                                                 "(You should have at lease 10 appropriate images in the images folder.)\n\n"
+                                                                 "*Hint: an appropriate image requires you to print out the 'pattern.png' picture on a full size A4 paper, "
+                                                                 "and take several images holding it in different positions while the camera can still see the full image.\n"
+                                                                 "It is important that You take the images with the camera on the device You wish to use this application on.");
     }
 }
 

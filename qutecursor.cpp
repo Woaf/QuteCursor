@@ -19,31 +19,21 @@ QuteCursor::~QuteCursor()
     delete ui;
 }
 
-
-void QuteCursor::on_calibrate_clicked()
+void QuteCursor::calibrateAction()
 {
-    ui->calibrate->setDisabled(true);
-    runCameraCalib();
-    ui->calibrate->setEnabled(true);
+    QMessageBox::StandardButton calibrate;
+    calibrate = QMessageBox::question(this, "Camera calibration", "Are you sure you want calibrate Your camera?", QMessageBox::Yes|QMessageBox::No);
+    if (calibrate == QMessageBox::Yes)
+    {
+        ui->calibrate->setText("Calibrating...");
+        ui->calibrate->setDisabled(true);
+        runCameraCalib();
+        ui->calibrate->setText("Calibrate camera");
+        ui->calibrate->setEnabled(true);
+    }
 }
 
-void QuteCursor::on_cursor_clicked()
-{
-    ui->cursor->setDisabled(true);
-    this->hide();
-    runHeadCursor();
-    this->show();
-    ui->cursor->setEnabled(true);
-}
-
-void QuteCursor::on_actionCalibrate_camera_triggered()
-{
-    ui->calibrate->setDisabled(true);
-    runCameraCalib();
-    ui->calibrate->setEnabled(true);
-}
-
-void QuteCursor::on_actionStart_QuteCursor_triggered()
+void QuteCursor::quteCursorAction()
 {
     ui->cursor->setDisabled(true);
     this->hide();
@@ -52,12 +42,37 @@ void QuteCursor::on_actionStart_QuteCursor_triggered()
     ui->cursor->setEnabled(true);
 }
 
-void QuteCursor::on_actionQuit_triggered()
+void QuteCursor::quitAction()
 {
     QMessageBox::StandardButton quit;
-    quit = QMessageBox::question(new QWidget, "Quit Qute Cursor", "Are you sure you want Quit this application?", QMessageBox::Yes|QMessageBox::No);
+    quit = QMessageBox::question(this, "Quit Qute Cursor", "Are you sure you want Quit this application?", QMessageBox::Yes|QMessageBox::No);
     if (quit == QMessageBox::Yes)
     {
         exit(0);
     }
+}
+
+void QuteCursor::on_calibrate_clicked()
+{
+    calibrateAction();
+}
+
+void QuteCursor::on_cursor_clicked()
+{
+    quteCursorAction();
+}
+
+void QuteCursor::on_actionCalibrate_camera_triggered()
+{
+    calibrateAction();
+}
+
+void QuteCursor::on_actionStart_QuteCursor_triggered()
+{
+    quteCursorAction();
+}
+
+void QuteCursor::on_actionQuit_triggered()
+{
+    quitAction();
 }

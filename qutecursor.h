@@ -16,6 +16,12 @@ public:
     ~QuteCursor();
 
 private slots:
+    void calibrateAction();
+
+    void quteCursorAction();
+
+    void quitAction();
+
     void on_calibrate_clicked();
 
     void on_cursor_clicked();
