@@ -12,6 +12,8 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = QtCursor
 TEMPLATE = app
 
+RC_FILE = qutecursor.rt
+
 INCLUDEPATH += C:\\opencv31\\build\\include
 CONFIG(debug,debug|release) {
     LIBS += -LE:\\opencvqtbuild\\lib\\Debug \
