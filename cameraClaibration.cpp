@@ -49,8 +49,8 @@ int calibrateCameraOnce()
     fs.release();                                         // close Settings file
     //! [file_read]
 
-    //FileStorage fout("settings.yml", FileStorage::WRITE); // write config as YAML
-    //fout << "Settings" << s;
+    FileStorage fout("settings.yml", FileStorage::WRITE); // write config as YAML
+    fout << "Settings" << s;
 
     if (!s.goodInput)
     {
