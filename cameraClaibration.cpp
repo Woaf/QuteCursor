@@ -2,7 +2,7 @@
 // ez a kod elerheto az opencv konyvetrabol
 //		C:\opencv31\sources\samples\cpp\tutorial_code\calib3d\camera_calibration
 #ifndef _CRT_SECURE_NO_WARNINGS
-# define _CRT_SECURE_NO_WARNINGS
+#define _CRT_SECURE_NO_WARNINGS
 #endif
 
 #include "cameraCalibration.h"
@@ -35,6 +35,13 @@ static inline void write(FileStorage &fs, const String &, const Settings &s)
 int calibrateCameraOnce()
 {
     help();
+
+    // sajat kod
+    QMessageBox waitMessage(QMessageBox::NoIcon, "Calibrating...", "Please wait until the calibration is done. This might take a few minutes.");
+    waitMessage.move(500, 300);
+    waitMessage.setWindowFlags(Qt::WindowStaysOnTopHint);
+    waitMessage.show();
+    // ! sajat kod
 
     //! [file_read]
     Settings s;
@@ -179,10 +186,13 @@ int calibrateCameraOnce()
         //------------------------------ Show image and check for input commands -------------------
         //! [await_input]
         imshow("Image View", view);
+        moveWindow("Image View", 250, 150);
         char key = (char)waitKey(s.inputCapture.isOpened() ? 50 : s.delay);
+        /*
 
         if (key == ESC_KEY)
             break;
+        */
 
         if (key == 'u' && mode == CALIBRATED)
             s.showUndistorsed = !s.showUndistorsed;
@@ -225,15 +235,26 @@ int calibrateCameraOnce()
                 continue;
             remap(view, rview, map1, map2, INTER_LINEAR);
             imshow("Image View", rview);
+            /*
             char c = (char)waitKey();
             if (c == ESC_KEY || c == 'q' || c == 'Q')
                 break;
+            */
         }
     }
-    //! [show_results]
     // kiirjuk egy egyszerubben feldolgozhato fajlba a kamera parametereit
     // sajat kod
+    if(waitMessage.isVisible())
+    {
+        waitMessage.close();
+    }
+    destroyAllWindows();
     writeCameraMatrixToAFile(cameraMatrix);
+    QMessageBox calibInfo(QMessageBox::Information, "Successsful calibration", "Camera successfully calibrated!");
+    calibInfo.move(500, 300);
+    calibInfo.exec();
+    // ! sajat kod
+    //! [show_results]
     return 0;
 }
 
