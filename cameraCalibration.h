@@ -8,10 +8,7 @@
 #include <iostream>
 #include <ctime>
 #include <cstdio>
-#include <QApplication>
-#include <QDesktopWidget>
 #include <QMessageBox>
-#include <QRect>
 
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui/highgui.hpp"
