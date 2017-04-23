@@ -1,7 +1,49 @@
-#include "welcomeMessage.h"
+#include "messages.h"
 
 using namespace std;
 
+// The following functions are to show the messages
+// in the gui application
+
+void showCameraNotFoundMessage(QWidget* window)
+{
+    QMessageBox::critical(window, "Camera detection failure", "Could not detect camera!\n\n"
+                                                             "Please make sure that a camera is attached or enabled on Your device.");
+}
+
+void creatingNewMatrixFileMessage(QWidget* window)
+{
+    QMessageBox::information(window, "Camera calibration", "Could not open an existing camera matrix file.\nOpening default camera matrix file.");
+}
+
+bool confirmCalibration(QWidget* window)
+{
+    QMessageBox::StandardButton confirm = QMessageBox::question(window, "Camera calibration", "Are you sure you want to calibrate Your camera?", QMessageBox::Yes|QMessageBox::No);
+    if(confirm == QMessageBox::Yes)
+    {
+        return true;
+    }
+    return false;
+}
+
+void showCalibrationSuccessMessage(QWidget* window)
+{
+    QMessageBox::information(window,"Successful calibration", "Camera successfully calibrated!");
+}
+
+void showCalibrationFailureMessage(QWidget* window)
+{
+    QMessageBox::critical(window, "Camera calibration", "Could not calibrate camera!\n\n"
+                                                             "Make sure that 'default.xml' is not missing from the directory of this application,\n"
+                                                             "and that You have given valid images in the images folder.\n"
+                                                             "(You should have at lease 10 appropriate images in the images folder.)\n\n"
+                                                             "*Hint: an appropriate image requires you to print out the 'pattern.png' picture on a full size A4 paper, "
+                                                             "and take several images holding it in different positions while the camera can still see the full image.\n"
+                                                             "It is important that You take the images with the camera on the device You wish to use this application on.");
+}
+
+// The following functions are left here in case
+// the application is run in console
 void showWelcomeMessage()
 {
     cout << "  _   _                _    ____ " << endl;

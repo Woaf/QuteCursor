@@ -32,13 +32,12 @@ static inline void write(FileStorage &fs, const String &, const Settings &s)
     s.write(fs);
 }
 
-int calibrateCameraOnce()
+int calibrateCameraOnce(QWidget* parent)
 {
     help();
 
     // sajat kod
     QMessageBox waitMessage(QMessageBox::NoIcon, "Calibrating...", "Please wait until the calibration is done. This might take a few minutes.");
-    waitMessage.move(500, 300);
     waitMessage.setWindowFlags(Qt::WindowStaysOnTopHint);
     waitMessage.show();
     // ! sajat kod
@@ -250,9 +249,7 @@ int calibrateCameraOnce()
     }
     destroyAllWindows();
     writeCameraMatrixToAFile(cameraMatrix);
-    QMessageBox calibInfo(QMessageBox::Information, "Successsful calibration", "Camera successfully calibrated!");
-    calibInfo.move(500, 300);
-    calibInfo.exec();
+    showCalibrationSuccessMessage(parent);
     // ! sajat kod
     //! [show_results]
     return 0;

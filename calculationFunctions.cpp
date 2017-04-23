@@ -1,4 +1,4 @@
-#include "calculaitonFunctions.h"
+#include "calculationFunctions.h"
 
 using namespace std;
 using namespace cv;
@@ -40,6 +40,11 @@ Point3d returnCentroidOfThreePoints(int dimensions, Point3d first, Point3d secon
     default:
         return (Point3d(first.x + second.x + third.x, first.y + second.y + third.y, first.z + second.z + third.z) / 3.0);
     }
+}
+
+Point3d returnUnitRemovedPoints(Point3d point, Point3d centroid, double focalLength_x, double focalLength_y)
+{
+    return Point3d((point.x - centroid.x) / focalLength_x, (point.y - centroid.y) / focalLength_y, 1);
 }
 
 void returnMatrixOfTwoVectors(Mat &mat, Point3d mesh, Point3d face)

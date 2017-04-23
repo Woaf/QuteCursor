@@ -2,7 +2,7 @@
 #include "qutecursor.h"
 #include "ui_qutecursor.h"
 #include "headPoseCursor.h"
-#include "welcomeMessage.h"
+#include "messages.h"
 
 QuteCursor::QuteCursor(QWidget *parent) :
     QMainWindow(parent),
@@ -21,13 +21,12 @@ QuteCursor::~QuteCursor()
 
 void QuteCursor::calibrateAction()
 {
-    QMessageBox::StandardButton calibrate;
-    calibrate = QMessageBox::question(this, "Camera calibration", "Are you sure you want calibrate Your camera?", QMessageBox::Yes|QMessageBox::No);
-    if (calibrate == QMessageBox::Yes)
+
+    if (confirmCalibration(this->window()))
     {
         ui->calibrate->setText("Calibrating...");
         ui->calibrate->setDisabled(true);
-        runCameraCalib();
+        runCameraCalib(this->window());
         ui->calibrate->setText("Calibrate camera");
         ui->calibrate->setEnabled(true);
     }
@@ -37,15 +36,33 @@ void QuteCursor::quteCursorAction()
 {
     ui->cursor->setDisabled(true);
     this->hide();
-    runHeadCursor();
+    runHeadCursor(this->window());
     this->show();
     ui->cursor->setEnabled(true);
+}
+
+void QuteCursor::viewChangeAction()
+{
+    if(!compactView)
+    {
+        this->setFixedSize(645, 460);
+        ui->cursor->setDisabled(true);
+        ui->calibrate->setDisabled(true);
+        compactView = true;
+    }
+    else
+    {
+        this->setFixedSize(830, 460);
+        ui->cursor->setEnabled(true);
+        ui->calibrate->setEnabled(true);
+        compactView = false;
+    }
 }
 
 void QuteCursor::quitAction()
 {
     QMessageBox::StandardButton quit;
-    quit = QMessageBox::question(this, "Quit Qute Cursor", "Are you sure you want Quit this application?", QMessageBox::Yes|QMessageBox::No);
+    quit = QMessageBox::question(this, "Quit Qute Cursor", "Are you sure you want to Quit this application?", QMessageBox::Yes|QMessageBox::No);
     if (quit == QMessageBox::Yes)
     {
         exit(0);
@@ -75,4 +92,14 @@ void QuteCursor::on_actionStart_QuteCursor_triggered()
 void QuteCursor::on_actionQuit_triggered()
 {
     quitAction();
+}
+
+void QuteCursor::on_actionCompact_View_triggered()
+{
+    viewChangeAction();
+}
+
+void QuteCursor::on_pushButton_clicked()
+{
+    viewChangeAction();
 }

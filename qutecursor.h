@@ -20,6 +20,8 @@ private slots:
 
     void quteCursorAction();
 
+    void viewChangeAction();
+
     void quitAction();
 
     void on_calibrate_clicked();
@@ -32,8 +34,13 @@ private slots:
 
     void on_actionStart_QuteCursor_triggered();
 
+    void on_actionCompact_View_triggered();
+
+    void on_pushButton_clicked();
+
 private:
     Ui::QuteCursor *ui;
+    bool compactView = false;
 };
 
 #endif // QUTECURSOR_H

@@ -25,7 +25,6 @@ void leftMouseButtonDownEvent();
 void leftMouseButtonReleaseEvent();
 
 // UNTESTED
-cv::Point3d returnUnitRemovedPoints(cv::Point3d point, cv::Point3d centroid, double focalLength_x, double focalLength_y);
 cv::Point3d returnCentoridOfNPoints(std::vector<cv::Point3d> points);
 cv::Point3d returnDifferenceOfTwoPoints(cv::Point3d first, cv::Point3d second);
 

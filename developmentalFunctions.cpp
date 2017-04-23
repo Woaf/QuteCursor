@@ -5,11 +5,6 @@ using namespace cv;
 
 HWND hWindow;
 
-Point3d returnUnitRemovedPoints(Point3d point, Point3d centroid, double focalLength_x, double focalLength_y)
-{
-    return Point3d((point.x - centroid.x) / focalLength_x, (point.y - centroid.y) / focalLength_y, 1);
-}
-
 // kesobbi hasznalatra (talan)
 Point3d returnCentoridOfNPoints(std::vector<Point3d> points)
 {

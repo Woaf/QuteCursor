@@ -13,6 +13,7 @@ double returnMaximumOfTwoValues(double first, double second);
 double returnThreeDimensionalDistance(cv::Point3d point);
 double returnThreeDimensionalDistance(cv::Point3d first, cv::Point3d second);
 cv::Point3d returnCentroidOfThreePoints(int dimensions, cv::Point3d first, cv::Point3d second, cv::Point3d third);
+cv::Point3d returnUnitRemovedPoints(cv::Point3d point, cv::Point3d centroid, double focalLength_x, double focalLength_y);
 void returnMatrixOfTwoVectors(cv::Mat &mat, cv::Point3d mesh, cv::Point3d face);
 cv::Point returnDrawablePoint(cv::Point3d point, double norm_coeff, int window_width, int window_height);
 double returnSumOfAnglesBetweenThreePoints(cv::Point3d first, cv::Point3d second, cv::Point3d third);

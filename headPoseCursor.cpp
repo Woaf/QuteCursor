@@ -34,11 +34,11 @@ instructions.  Note that AVX is the fastest but requires a CPU from at least
 2011.  SSE4 is the next fastest and is supported by most current machines.
 */
 
-#include "welcomeMessage.h"
+#include "messages.h"
 #include "directoryAccessFunctions.h"
 #include "cameraCalibration.h"
 #include "fileHandlerFunctions.h"
-#include "calculaitonFunctions.h"
+#include "calculationFunctions.h"
 #include "developmentalFunctions.h"
 #include "errorHandling.h"
 
@@ -56,31 +56,22 @@ instructions.  Note that AVX is the fastest but requires a CPU from at least
 #include <dlib/gui_widgets.h>
 #include <dlib/image_io.h>
 
-#include <QApplication>
-#include <QMessageBox>
-
 using namespace std;
 using namespace dlib;
 using namespace cv;
 
 // ----------------------------------------------------------------------------------------
 
-void runCameraCalib()
+void runCameraCalib(QWidget* window)
 {
     writeFolderContentsToAFile();
-    if (calibrateCameraOnce() != 0)
+    if (calibrateCameraOnce(window) != 0)
     {
-        QMessageBox::critical(new QWidget, "Camera calibration", "Could not calibrate camera!\n\n"
-                                                                 "Make sure that 'default.xml' is not missing from the directory of this application,\n"
-                                                                 "and that You have given valid images in the images folder.\n"
-                                                                 "(You should have at lease 10 appropriate images in the images folder.)\n\n"
-                                                                 "*Hint: an appropriate image requires you to print out the 'pattern.png' picture on a full size A4 paper, "
-                                                                 "and take several images holding it in different positions while the camera can still see the full image.\n"
-                                                                 "It is important that You take the images with the camera on the device You wish to use this application on.");
+        showCalibrationFailureMessage(window);
     }
 }
 
-int runHeadCursor()
+int runHeadCursor(QWidget* parentWindow)
 {
     try
     {
@@ -88,8 +79,7 @@ int runHeadCursor()
         VideoCapture cap(0);
         if (!cap.isOpened())
         {
-            QMessageBox::critical(new QWidget, "Camera calibration", "Could not detect camera!\n\n"
-                                                                     "Please make sure that a camera is attached or enabled on Your device.");
+            showCameraNotFoundMessage(parentWindow);
             cerr << "Could not detect camera!" << endl;
             return -1;
         }
@@ -98,7 +88,7 @@ int runHeadCursor()
         cameraMatrixFile.open("cameraMatrixFile");
         if (!cameraMatrixFile.is_open())
         {
-            QMessageBox::information(new QWidget, "Camera calibration", "Could not open an existing camera matrix file.\nOpening default camera matrix file.");
+            creatingNewMatrixFileMessage(parentWindow);
             cout << "Could not open an existing camera matrix file." << endl;
             cout << "Opening default camera matrix file." << endl;
             createCameraMatrixFile();
@@ -330,7 +320,7 @@ int runHeadCursor()
     catch (exception &e)
     {
         writeErrorFile(e);
-        QMessageBox::critical(new QWidget, "Failure", e.what());
+        QMessageBox::critical(parentWindow, "Failure", e.what());
         return -1;
     }
 

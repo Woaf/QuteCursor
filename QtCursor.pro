@@ -75,23 +75,23 @@ SOURCES += main.cpp\
         qutecursor.cpp\
     ../../../dlib-19.2/dlib/all/source.cpp \
     calculationFunctions.cpp \
-    cameraClaibration.cpp \
     directoryAccessFunctions.cpp \
     errorHandling.cpp \
     fileHandlerFunctions.cpp \
     headPoseCursor.cpp \
-    welcomeMessage.cpp \
-    developmentalFunctions.cpp
+    developmentalFunctions.cpp \
+    messages.cpp \
+    cameraCalibration.cpp
 
 HEADERS  += qutecursor.h \
-    calculaitonFunctions.h \
     cameraCalibration.h \
     directoryAccessFunctions.h \
     dirent.h \
     errorHandling.h \
     fileHandlerFunctions.h \
     headPoseCursor.h \
-    welcomeMessage.h \
-    developmentalFunctions.h
+    developmentalFunctions.h \
+    messages.h \
+    calculationFunctions.h
 
 FORMS    += qutecursor.ui
