@@ -2,6 +2,11 @@
 #define QUTECURSOR_H_
 
 #include <QMainWindow>
+#include <QMessageBox>
+#include "qutecursor.h"
+#include "ui_qutecursor.h"
+#include "headPoseCursor.h"
+#include "messages.h"
 
 namespace Ui {
 class QuteCursor;

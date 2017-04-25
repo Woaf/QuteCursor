@@ -1,8 +1,4 @@
-#include <QMessageBox>
 #include "qutecursor.h"
-#include "ui_qutecursor.h"
-#include "headPoseCursor.h"
-#include "messages.h"
 
 QuteCursor::QuteCursor(QWidget *parent) :
     QMainWindow(parent),

@@ -10,6 +10,7 @@
 #include <cstdio>
 
 #include "messages.h"
+#include "fileHandlerFunctions.h"
 
 #include "opencv2/imgcodecs.hpp"
 #include "opencv2/highgui/highgui.hpp"
