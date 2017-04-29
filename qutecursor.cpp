@@ -1,4 +1,5 @@
 #include "qutecursor.h"
+#include <QDebug>
 
 QuteCursor::QuteCursor(QWidget *parent) :
     QMainWindow(parent),
@@ -22,9 +23,11 @@ void QuteCursor::calibrateAction()
     {
         ui->calibrate->setText("Calibrating...");
         ui->calibrate->setDisabled(true);
+        ui->menuMenu->setDisabled(true);
         runCameraCalib(this->window());
         ui->calibrate->setText("Calibrate camera");
         ui->calibrate->setEnabled(true);
+        ui->menuMenu->setEnabled(true);
     }
 }
 
@@ -42,15 +45,22 @@ void QuteCursor::viewChangeAction()
     if(!compactView)
     {
         this->setFixedSize(645, 460);
-        ui->cursor->setDisabled(true);
         ui->calibrate->setDisabled(true);
+        ui->cursor->setDisabled(true);
         compactView = true;
     }
     else
     {
         this->setFixedSize(830, 460);
+        if(ui->menuMenu->isEnabled())
+        {
+            ui->calibrate->setEnabled(true);
+        }
+        else
+        {
+            ui->calibrate->setDisabled(true);
+        }
         ui->cursor->setEnabled(true);
-        ui->calibrate->setEnabled(true);
         compactView = false;
     }
 }
