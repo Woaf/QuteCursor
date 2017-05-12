@@ -11,6 +11,6 @@ void writeErrorFile(exception &e)
 {
     ofstream myFile;
     myFile.open("C:/Users/balin/Desktop/error_message.txt");
-    myFile << "EXCEPTION THROWN: \n" << e.what() << "\n";
+    myFile << "EXCEPTION THROWN: \n" << e.what();
     myFile.close();
 }
